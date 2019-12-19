@@ -1,0 +1,46 @@
+@using WeddingPlanner.Models;
+@model LogRegViewModel
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body style="margin:auto;width:970px;height:970px;">
+    <h1 style="width:777px;display:inline-block;">Welcome to The Wedding Planner App!</h1>
+    <form asp-action="ProcessRegistration" asp-controller="User" method="POST" style="display:inline-block;">
+        <h1>Register</h1>
+        <span asp-validation-for="RegisterUser.FirstName"></span><br>
+        <label asp-for="RegisterUser.FirstName">First Name</label><br>
+        <input type="input" asp-for="RegisterUser.FirstName"><br>
+        <span asp-validation-for="RegisterUser.LastName"></span><br>
+        <label asp-for="RegisterUser.LastName">Last Name</label><br>
+        <input type="input" asp-for="RegisterUser.LastName"><br>
+        <span asp-validation-for="RegisterUser.Email" style="color:red;"></span><br>
+        <label asp-for="RegisterUser.Email">Email</label><br>
+        <input type="email" asp-for="RegisterUser.Email"><br>
+        <span asp-validation-for="RegisterUser.Password"></span><br>
+        <label asp-for="RegisterUser.Password">Password</label><br>
+        <input type="password" asp-for="RegisterUser.Password"><br>
+        <span asp-validation-for="RegisterUser.ConfirmPassword"></span><br>
+        <label asp-for="RegisterUser.ConfirmPassword">Confirm Password</label><br>
+        <input type="password" asp-for="RegisterUser.ConfirmPassword" ><br><br>
+        <input type="submit" Value="Sign Up Now" style="background-color:blue;color:white;">
+    </form>
+    <form asp-action="ProcessLogin" asp-controller="User" method="POST" style="display:inline-block;vertical-align:top;margin-left:60px;">
+        <h1>Log In</h1>
+        <span asp-validation-for="LoginUser.LoginEmail"></span><br>
+        <label asp-for="LoginUser.LoginEmail">Email</label><br>
+        <input type="email" asp-for="LoginUser.LoginEmail"><br>
+        <span asp-validation-for="LoginUser.LoginPassword"></span><br>
+        <label asp-for="LoginUser.LoginPassword">Password</label><br>
+        <input type="password" asp-for="LoginUser.LoginPassword"><br><br>
+        <input type="submit" value="Log In" style="background-color:blue;color:white;">
+    </form>
+</body>
+</html>

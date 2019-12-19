@@ -1,0 +1,49 @@
+@using WeddingPlanner.Models;
+@model Wedding
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="margin:auto;width:970px;height:970px;">
+    <h1 style="width:560px;display:inline-block;text-align:center;margin-bottom:60px;">@Model.WedderOne & @Model.WedderTwo's Wedding</h1>
+    <a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+    <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    <table style="width:930px;height:15px;border:2px solid black;overflow:scroll;">
+            <tr style="height:35px;background-color:rgba(0,0,0,50);">
+                <th style="color:white;padding-left:30px;height:35px;border:2px solid black;vertical-align:top;">Wedding Date</th>
+                <th style="color:white;padding-left:30px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Wedding Address</th>
+                <th style="color:white;padding-left:30px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Wedding City</th>
+                <th style="color:white;height:35px;height:35px;border:2px solid black;vertical-align:top;padding-left:30px;">Wedding State</th>
+                <th style="color:white;height:35px;height:35px;border:2px solid black;vertical-align:top;padding-left:20px;">Wedding Zip Code</th>
+            </tr>
+            <tr>
+                <td style="width:450px;border:2px solid black; solid black;padding-left:15px;">@Model.WeddingDate.ToString("hh:mm tt dddd, MMMM dd, yyyy")</td>
+                <td style="width:450px;border:2px solid black; solid black;padding-left:30px;">@Model.WeddingAddress</td>
+                <td style="width:450px;border:2px solid black; solid black;padding-left:30px;">@Model.WeddingCity</td>
+                <td style="width:450px;border:2px solid black; solid black;padding-left:90px;">@Model.WeddingState</td>
+                <td style="width:450px;border:2px solid black; solid black;padding-left:70px;">@Model.WeddingZipCode</td>
+
+            </tr>
+
+
+    </table>
+    
+    
+    <h2>Wedding Guest List</h2>
+    <ul>
+        <h3>Number of Attendees: @Model.GuestsAttending.Count</h3>
+        @foreach (Association guest in Model.GuestsAttending)
+        {
+            <li>@guest.AGuest.FirstName @guest.AGuest.LastName</li>
+            <!-- GuestsAttending comes from Wedding.cs
+            AGuest comes from Association.cs  -->
+            <!-- FirstName is an attribute in User.cs  -->
+        }
+    </ul>
+</body>
+</html>

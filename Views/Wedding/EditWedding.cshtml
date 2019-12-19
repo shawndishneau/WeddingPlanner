@@ -1,0 +1,38 @@
+@using WeddingPlanner.Models;
+@model Wedding
+
+    <h1 style="width:560px;display:inline-block;text-align:center;margin-bottom:55px;">Plan Your Wedding</h1>
+    <a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+    <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    <form asp-action="EditingWedding" asp-controller="Wedding" method="POST">
+
+        <div>Wedder One</div>
+        <span asp-validation-for="WedderOne"></span><br>
+        <input asp-for="WedderOne" style="width:300px;"><br>
+
+        <div>Wedder Two</div>
+        <span asp-validation-for="WedderTwo"></span><br>
+        <input asp-for="WedderTwo" style="width:300px;"><br>
+
+        <div>Wedding Date / Time</div>
+        <span asp-validation-for="WeddingDate"></span><br>
+        <input asp-for="WeddingDate"><br>
+
+        <div>Wedding Address</div>
+        <span asp-validation-for="WeddingAddress"></span><br>
+        <input asp-for="WeddingAddress" style="width:300px;"><br>
+
+        <div>Wedding City</div>
+        <span asp-validation-for="WeddingCity"></span><br>
+        <input asp-for="WeddingCity" style="width:300px;"><br>
+
+        <div>Wedding State</div>
+        <span asp-validation-for="WeddingState"></span><br>
+        <input asp-for="WeddingState" style="width:300px;"><br>
+
+        <div>Wedding Zip Code</div>
+        <span asp-validation-for="WeddingZipCode"></span><br>
+        <input asp-for="WeddingZipCode" style="width:300px;"><br>
+        <input type="submit" value="Save" style="background-color: blue; color:white;">
+        
+    </form>

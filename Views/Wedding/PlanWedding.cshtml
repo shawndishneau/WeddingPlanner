@@ -1,0 +1,49 @@
+@using WeddingPlanner.Models;
+@model Wedding
+
+
+    <h1 style="width:560px;display:inline-block;text-align:center;margin-bottom:55px;">Plan Your Wedding</h1>
+    <a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+    <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    <form asp-action="ProcessPlanWedding" asp-controller="Wedding" method="POST">
+        <span asp-validation-for="WedderOne"></span><br>
+        <label asp-for="WedderOne">Wedder One(First Name)</label><br>
+        <input asp-for="WedderOne" style="width:300px;"><br>
+
+        <span asp-validation-for="WedderTwo"></span><br>
+        <label asp-for="WedderTwo">Wedder Two(First Name)</label><br>
+        <input asp-for="WedderTwo" style="width:300px;"><br>
+
+        <span asp-validation-for="WeddingDate"></span><br>
+        <label asp-for="WeddingDate">Wedding Date and Time</label><br>
+        <input asp-for="WeddingDate"><br>
+
+        <span asp-validation-for="WeddingAddress"></span><br>
+        <label asp-for="WeddingAddress">Wedding Address</label><br>
+        <input asp-for="WeddingAddress" style="width:300px;"><br>
+
+        <span asp-validation-for="WeddingCity"></span><br>
+        <label asp-for="WeddingCity">Wedding City</label><br>
+        <input asp-for="WeddingCity" style="width:300px;"><br>
+
+        <span asp-validation-for="WeddingState"></span><br>
+        <label asp-for="WeddingState">Wedding State</label><br>
+        <select asp-for="WeddingState"><br>
+            <option value=""></option>
+            <option value="AZ">AZ</option>
+            <option value="ID">ID</option>
+            <option value="KS">KS</option>
+            <option value="NY">NY</option>
+            <option value="TX">TX</option>
+            <option value="WA">WA</option>
+        </select><br>
+
+        <span asp-validation-for="WeddingZipCode"></span><br>
+        <label asp-for="WeddingZipCode">Wedding Zip Code (5 digits)</label><br>
+        <input asp-for="WeddingZipCode" style="width:80px;"><br>
+        <input type="submit" style="margin-top:20px;background-color:blue;color:white">
+    </form>
+
+
+
+    

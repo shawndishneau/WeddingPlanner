@@ -1,0 +1,138 @@
+@using WeddingPlanner.Models;
+@model List<Wedding>
+
+        <!-- I used ViewBag because I took info from one controller to the next-->
+        <h1 style="width:950px;inline-block;text-align:center;margin-bottom:50px;">Hi, @ViewBag.firstName @ViewBag.lastName</h1>
+    <h1 style="width:950px;inline-block;text-align:center;margin-bottom:50px;">Welcome to the Wedding Planner App!!!</h1>
+        <a asp-action="PlanWedding" asp-controller="Wedding"><button style="background-color:blue;color:white;display:inline-block;">New Wedding!</button></a>
+        <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+        <table style="width:930px;height:15px;border:2px solid black;overflow:scroll;">
+            <tr style="height:35px;background-color:rgba(0,0,0,50);">
+                <th style="color:white;padding-left:130px;height:35px;border:2px solid black;vertical-align:top;">Wedding</th>
+                <th style="color:white;padding-left:140px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Date</th>
+                <th style="color:white;padding-left:10px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Guest Count</th>
+                <th style="color:white;height:35px;height:35px;border:2px solid black;vertical-align:top;padding-left:50px;">Action</th>
+            </tr>
+
+        @foreach (Wedding ceremony in Model)
+        {
+            <tr style="height:35px;">
+                <td style="width:450px;border:2px solid black; solid black;padding-left:30px;"><a href="/ViewWedding/@ceremony.WeddingId">@ceremony.WedderOne & @ceremony.WedderTwo</a></td>
+                <td style="width:450px;border:2px solid black;padding-left:30px;">
+                    @ceremony.WeddingDate.ToString("h:mm tt dddd, dd MMMM yyyy")
+                </td>
+                
+                <td style="width:50px;border:2px solid black;padding-left:25px;padding-right:5px;">@ceremony.GuestsAttending.Count</td>
+                <td style="width:200px;border:2px solid black;padding-left:20px;">
+                    
+                    @if (@ViewBag.LoggedUserId == @ceremony.CreatorId)
+                    {
+                        
+                        @if((DateTime.Now - @ceremony.CreatedAt).TotalSeconds < 30)
+                        {
+                            <a href="/Delete/@ceremony.WeddingId">Delete</a>
+                        }
+                        <a href="/EditWedding/@ceremony.WeddingId">Edit</a>
+                        <a href="/ViewWedding/@ceremony.WeddingId">View</a>
+                    } 
+                
+                    else if(ceremony.GuestsAttending.Any(a => a.UserId == @ViewBag.LoggedUserId))
+                    {
+                        <a href="/ProcessUnJoinWedding/@ceremony.WeddingId" style="padding-left:30px;">Un-RSVP</a>
+                    } 
+                    else
+                    {
+                        <a href="/ProcessJoinWedding/@ceremony.WeddingId" style="padding-left:43px;">RSVP</a>
+                    }
+                </td>
+            </tr>
+        }
+        </table>
+
+        <h1>Second Option</h1>
+
+
+
+
+
+
+
+
+
+        <table style="width:930px;height:15px;border:2px solid black;overflow:scroll;">
+            <tr style="height:35px;background-color:rgba(0,0,0,50);">
+                <th style="color:white;padding-left:130px;height:35px;border:2px solid black;vertical-align:top;">Wedding</th>
+                <th style="color:white;padding-left:140px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Date</th>
+                <th style="color:white;padding-left:10px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Guest Count</th>
+                <th style="color:white;height:35px;height:35px;border:2px solid black;vertical-align:top;padding-left:50px;">Action</th>
+            </tr>
+
+        @foreach (Wedding ceremony in Model)
+        
+        {
+            if(ceremony.GuestsAttending.Any(a => a.UserId == ViewBag.LoggedUserId))
+            {
+                <tr style="height:35px;">
+                <td style="width:450px;border:2px solid black; solid black;padding-left:30px;"><a href="/ViewWedding/@ceremony.WeddingId">@ceremony.WedderOne & @ceremony.WedderTwo</a></td>
+                <td style="width:450px;border:2px solid black;padding-left:30px;">
+                    @ceremony.WeddingDate.ToString("h:mm tt dddd, dd MMMM yyyy")
+                </td>
+                
+                <td style="width:50px;border:2px solid black;padding-left:25px;padding-right:5px;">@ceremony.GuestsAttending.Count</td>
+                <td style="width:200px;border:2px solid black;padding-left:20px;">
+                    
+                    @if (@ViewBag.LoggedUserId == @ceremony.CreatorId)
+                    {
+                        
+                        @if((DateTime.Now - @ceremony.CreatedAt).TotalSeconds < 30)
+                        {
+                            <a href="/Delete/@ceremony.WeddingId">Delete</a>
+                        }
+                        <a href="/EditWedding/@ceremony.WeddingId">Edit</a>
+                        <a href="/ViewWedding/@ceremony.WeddingId">View</a>
+                        <a href="/ProcessUnJoinWedding/@ceremony.WeddingId">Un-RSVP</a>
+                    } 
+                
+                    else if(ceremony.GuestsAttending.Any(a => a.UserId == @ViewBag.LoggedUserId))
+                    {
+                        <p style="padding-left:35px;">Joined</p><a href="/ProcessUnJoinWedding/@ceremony.WeddingId" style="padding-left:25px;">Un-RSVP</a>
+                    } 
+                    
+                </td>
+            </tr>
+            }
+            
+        }
+        </table>
+
+
+        <table style="width:930px;height:15px;border:2px solid black;overflow:scroll;">
+            <tr style="height:35px;background-color:rgba(0,0,0,50);">
+                <th style="color:white;padding-left:130px;height:35px;border:2px solid black;vertical-align:top;">Wedding</th>
+                <th style="color:white;padding-left:140px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Date</th>
+                <th style="color:white;padding-left:10px;height:35px;height:35px;border:2px solid black;vertical-align:top;">Guest Count</th>
+                <th style="color:white;height:35px;height:35px;border:2px solid black;vertical-align:top;padding-left:50px;">Action</th>
+            </tr>
+
+        @foreach (Wedding ceremony in Model)
+            {
+                if(!ceremony.GuestsAttending.Any(a => a.UserId == ViewBag.LoggedUserId))
+                {
+                    <tr style="height:35px;">
+                        <td style="width:450px;border:2px solid black; solid black;padding-left:30px;"><a href="/ViewWedding/@ceremony.WeddingId">@ceremony.WedderOne & @ceremony.WedderTwo</a></td>
+                        <td style="width:450px;border:2px solid black;padding-left:30px;">
+                            @ceremony.WeddingDate.ToString("h:mm tt dddd, dd MMMM yyyy")
+                        </td>
+                        
+                        <td style="width:50px;border:2px solid black;padding-left:25px;padding-right:5px;">@ceremony.GuestsAttending.Count</td>
+                        <td style="width:200px;border:2px solid black;padding-left:20px;">
+                            
+                        
+                            <a href="/EditWedding/@ceremony.WeddingId">Edit</a>
+                            <a href="/ViewWedding/@ceremony.WeddingId">View</a>
+                            <a href="/ProcessJoinWedding/@ceremony.WeddingId" style="padding-left:43px;">RSVP</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
